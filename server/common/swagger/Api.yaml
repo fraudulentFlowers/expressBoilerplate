@@ -9,6 +9,10 @@ tags:
     description: Simple example endpoints
   - name: Specification
     description: The swagger API specification
+  - name: Shoes
+    description: Simple shoe endpoint
+  - name: ShoeIds
+    description: Shoe Id endpoint
 
 consumes:
   - application/json
@@ -25,6 +29,15 @@ definitions:
       name:
         type: string
         description: The example name
+  ShoeBody:
+    type: object
+    title: shoe
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        description: The shoe name
 
 paths:
   /examples:
@@ -49,7 +62,29 @@ paths:
       responses:
         200:
           description: Returns all examples
-
+  /shoes:
+    get:
+      tags:
+        - Shoes
+      description: Fetch all shoes
+      responses:
+        200:
+          description: Returns all shoes
+  /shoes/{id}:
+    get:
+      tags:
+        - ShoeIds
+      description: Get Shoe Id
+      responses:
+        200:
+          description: Returns the given shoe id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Id of the shoe
+          schema:
+            type: integer
   /spec:
     get:
       tags:
